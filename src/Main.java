@@ -1,5 +1,5 @@
-import Herois.Heroi;
-import Monstros.Monstro;
+import Personagens.Herois.Heroi;
+import Personagens.Monstros.Monstro;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -28,20 +28,7 @@ public class Main {
         System.out.println("Pronto jogador " + nomeDeJogador + ", sua batalha irá começar!");
         System.out.println("Herói escolhido: " + heroiDeJogador.toString());
         System.out.println("Monstro escolhido para a batalha: " + monstroDeBatalha.toString());
-    }
 
-    public int receberNumeroInt() {
-        Scanner leitor;
-        int numero = 0;
-        do {
-            try {
-                leitor = new Scanner(System.in);
-                numero = leitor.nextInt();
-            } catch (Exception ex) {
-                System.out.println("Somente receber números.");
-            }
-        } while (numero == 0);
-        return numero;
+        System.out.println("Para iniciar a batalha, iremos ver quem terá o número maior rolando o dado de inicialização.");
     }
-
 }

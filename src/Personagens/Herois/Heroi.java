@@ -1,13 +1,10 @@
-package Herois;
+package Personagens.Herois;
 
-import Monstros.Kobold;
-import Monstros.Monstro;
-import Monstros.MortoVivo;
-import Monstros.Orc;
+import Personagens.Personagem;
 
 import java.util.Scanner;
 
-public class Heroi {
+public class Heroi extends Personagem {
     public int escolherPersonagem() {
         boolean pararLoop = false;
         int escolhaUsuario = 0;
@@ -43,24 +40,5 @@ public class Heroi {
             }
         }
         return monstroSelecionado;
-    }
-
-
-
-    private int receberNumeroInt() {
-        Scanner leitor;
-        boolean pararLoop = false;
-        int numero = 0;
-        do {
-            try {
-                leitor = new Scanner(System.in);
-                numero = leitor.nextInt();
-                pararLoop = true;
-            } catch (Exception ex) {
-                System.out.println("Erro: Somente receber números!");
-                System.out.print("Tente novamente: ");
-            }
-        } while (!pararLoop);
-        return numero;
     }
 }

@@ -1,9 +1,10 @@
-package Monstros;
+package Personagens.Monstros;
+import Personagens.Personagem;
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class Monstro {
+public class Monstro extends Personagem {
     public int escolherPersonagem() {
         boolean pararLoop = false;
         int escolhaUsuario = 0;
@@ -59,20 +60,5 @@ public class Monstro {
             }
         }
         return monstroSelecionado;
-    }
-
-
-    public int receberNumeroInt() {
-        Scanner leitor;
-        int numero = 0;
-        do {
-            try {
-                leitor = new Scanner(System.in);
-                numero = leitor.nextInt();
-            } catch (Exception ex) {
-                System.out.println("Somente receber números.");
-            }
-        } while (numero == 0);
-        return numero;
     }
 }
