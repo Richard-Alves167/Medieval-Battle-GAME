@@ -1,13 +1,14 @@
 import Personagens.Herois.Heroi;
 import Personagens.Monstros.Monstro;
+import Personagens.Personagem;
 
 import java.util.Random;
 
 public class Batalha {
-    private int rolarDadoInicializacaoDeBatalha(int fatorAgiligade) {
-        Random aleatorio = new Random();
-        int dado10Lados = aleatorio.nextInt(1,10);
-        int calculoIniciativa = dado10Lados + fatorAgiligade;
+    Dado dado = new Dado();
+
+    public int inicializacaoDeBatalha(int fatorAgiligade) {
+        int calculoIniciativa = dado.rolarDado10Lados() + fatorAgiligade;
         return calculoIniciativa;
     }
 
@@ -18,8 +19,8 @@ public class Batalha {
 
         do {
             System.out.println("Rolando os dados...");
-            valorHeroi = rolarDadoInicializacaoDeBatalha(heroiEscolhido.getAgilidade());
-            valorMonstro = rolarDadoInicializacaoDeBatalha(monstroEscolhido.getAgilidade());
+            valorHeroi = inicializacaoDeBatalha(heroiEscolhido.getAgilidade());
+            valorMonstro = inicializacaoDeBatalha(monstroEscolhido.getAgilidade());
             System.out.println("Valor do Herói: " + valorHeroi);
             System.out.println("Valor do Monstro: " + valorMonstro);
             if (valorHeroi == valorMonstro) {
@@ -36,4 +37,40 @@ public class Batalha {
         }
         return valorResultante;
     }
+
+    public int fatorDeAtaque(Personagem personagem) {
+        int fatorDeAtaque = dado.rolarDado10Lados() + personagem.getAgilidade() + personagem.getForca();
+        return fatorDeAtaque;
+    }
+
+    public int fatorDeDefesa(Personagem personagem) {
+        int fatorDeAtaque = dado.rolarDado10Lados()  + personagem.getAgilidade() + personagem.getDefesa();
+        return fatorDeAtaque;
+    }
+
+    public boolean verificarAtaque(Personagem personagem) {
+        if (fatorDeAtaque(personagem) > fatorDeDefesa(personagem)) {
+            return true;
+        }
+        return false;
+    }
+
+    public int calularDano(Personagem personagem) {
+        int dano = personagem.getForca();
+        String[] fatorDeDano = personagem.getFatorDeDano().split("d");
+        int quantidadeVezesDado = Integer.parseInt(fatorDeDano[0]);
+        int dadoLados = Integer.parseInt(fatorDeDano[1]);
+        for (int i = 1; i <=quantidadeVezesDado;i++) {
+            dano += dado.rolarDado(dadoLados);
+        }
+        return dano;
+    }
+    public int ataquePersonagem(Personagem personagem) {
+        if (verificarAtaque(personagem)) {
+            System.out.println("Pronto para atacar!");
+            return calularDano(personagem);
+        }
+        return 0;
+    }
+
 }

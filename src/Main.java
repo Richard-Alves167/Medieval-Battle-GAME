@@ -29,7 +29,6 @@ public class Main {
         System.out.println("Pronto jogador " + nomeDeJogador + ", sua batalha irá começar!");
         System.out.println("\nHerói escolhido: " + heroiDeJogador.toString());
         System.out.println("Monstro escolhido para a batalha: " + monstroDeBatalha.toString());
-
         System.out.println("\nPara iniciar a batalha, iremos ver quem terá o maior número, rolando o dado de inicialização (10 lados) com mais o número de agilidade do personagem.");
         boolean heroiComeça = metodoBatalha.iniciarBatalha(heroiDeJogador, monstroDeBatalha);
         System.out.println(heroiComeça);

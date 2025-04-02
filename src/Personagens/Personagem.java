@@ -1,5 +1,6 @@
 package Personagens;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Personagem {
@@ -14,7 +15,7 @@ public class Personagem {
         return classe;
     }
 
-    public void setClasse(String classe) {
+    protected void setClasse(String classe) {
         this.classe = classe;
     }
 
@@ -22,7 +23,7 @@ public class Personagem {
         return pontosDeVida;
     }
 
-    public void setPontosDeVida(int pontosDeVida) {
+    protected void setPontosDeVida(int pontosDeVida) {
         this.pontosDeVida = pontosDeVida;
     }
 
@@ -30,7 +31,7 @@ public class Personagem {
         return forca;
     }
 
-    public void setForca(int forca) {
+    protected void setForca(int forca) {
         this.forca = forca;
     }
 
@@ -38,7 +39,7 @@ public class Personagem {
         return defesa;
     }
 
-    public void setDefesa(int defesa) {
+    protected void setDefesa(int defesa) {
         this.defesa = defesa;
     }
 
@@ -46,7 +47,7 @@ public class Personagem {
         return agilidade;
     }
 
-    public void setAgilidade(int agilidade) {
+    protected void setAgilidade(int agilidade) {
         this.agilidade = agilidade;
     }
 
@@ -54,7 +55,7 @@ public class Personagem {
         return fatorDeDano;
     }
 
-    public void setFatorDeDano(String fatorDeDano) {
+    protected void setFatorDeDano(String fatorDeDano) {
         this.fatorDeDano = fatorDeDano;
     }
 
@@ -85,5 +86,4 @@ public class Personagem {
         } while (!pararLoop);
         return numero;
     }
-
 }
