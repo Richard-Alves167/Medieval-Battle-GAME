@@ -59,6 +59,11 @@ public class Personagem {
         this.fatorDeDano = fatorDeDano;
     }
 
+    public void receberAtaque(int ataqueInimigo) {
+        pontosDeVida -= ataqueInimigo;
+    }
+
+
     @Override
     public String toString() {
         return classe + "{" +

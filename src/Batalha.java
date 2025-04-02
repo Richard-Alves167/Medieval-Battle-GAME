@@ -50,12 +50,15 @@ public class Batalha {
 
     public boolean verificarAtaque(Personagem personagem) {
         if (fatorDeAtaque(personagem) > fatorDeDefesa(personagem)) {
+            System.out.println("O fator de ataque de "+ personagem.getClasse() + " foi superior ao de defesa!");
             return true;
         }
+        System.out.println("O "+ personagem.getClasse() + " perdeu o ataque!");
         return false;
     }
 
     public int calularDano(Personagem personagem) {
+        System.out.println("Calculando dano...");
         int dano = personagem.getForca();
         String[] fatorDeDano = personagem.getFatorDeDano().split("d");
         int quantidadeVezesDado = Integer.parseInt(fatorDeDano[0]);
@@ -67,7 +70,7 @@ public class Batalha {
     }
     public int ataquePersonagem(Personagem personagem) {
         if (verificarAtaque(personagem)) {
-            System.out.println("Pronto para atacar!");
+            System.out.println(personagem.getClass() + ": Pronto para atacar!");
             return calularDano(personagem);
         }
         return 0;
