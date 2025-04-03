@@ -1,5 +1,7 @@
 import Personagens.Herois.Heroi;
 import Personagens.Monstros.Monstro;
+import Personagens.Personagem;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,12 +17,7 @@ public class Main {
 
         System.out.print("Nickname: ");
         String nomeDeJogador = leitor.nextLine();
-
-        System.out.println("===== Heróis =====");
-        System.out.println("(1) Herói -> Guerreiro");
-        System.out.println("(2) Herói -> Bárbaro");
-        System.out.println("(3) Herói -> Paladino");
-        System.out.println("==================");
+        informacaoEscolherHeroi();
 
         int classeHeroiDeJogador = metodoHeroi.escolherPersonagem();
         Heroi heroiDeJogador = metodoHeroi.selecionarPersonagem(classeHeroiDeJogador);
@@ -37,21 +34,12 @@ public class Main {
             System.out.println("\nRodada " + rodadas);
             if (heroiAtaca) {
                 if (metodoBatalha.verificarAtaque(heroiDeJogador)) {
-                    System.out.println("Você atacou o " + monstroDeBatalha.getClasse());
-                    int dano = metodoBatalha.calularDano(heroiDeJogador);
-                    monstroDeBatalha.receberAtaque(dano);
-                    System.out.println("Você atacou com " + dano + " de dano ao " + monstroDeBatalha.getClasse());
-
-                } else {
-
+                    metodoBatalha.ataqueAoAdversario(heroiDeJogador,monstroDeBatalha);
                 }
                 heroiAtaca = false;
             } else {
                 if (metodoBatalha.verificarAtaque(monstroDeBatalha)) {
-                    System.out.println("O " + monstroDeBatalha.getClasse() + " inflingiu dano a você");
-                    int dano = metodoBatalha.calularDano(monstroDeBatalha);
-                    heroiDeJogador.receberAtaque(dano);
-                    System.out.println("Você recebeu um ataque de " + dano + " dano de " + monstroDeBatalha.getClasse());
+                    metodoBatalha.ataqueAoAdversario(monstroDeBatalha,heroiDeJogador);
                 }
                 heroiAtaca = true;
             }
@@ -63,5 +51,12 @@ public class Main {
         } else {
             System.out.println("Você derrotou o monstro! Parabéns!");
         }
+    }
+    public static void informacaoEscolherHeroi() {
+        System.out.println("===== Heróis =====");
+        System.out.println("(1) Herói -> Guerreiro");
+        System.out.println("(2) Herói -> Bárbaro");
+        System.out.println("(3) Herói -> Paladino");
+        System.out.println("==================");
     }
 }

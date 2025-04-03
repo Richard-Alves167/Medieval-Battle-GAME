@@ -63,7 +63,6 @@ public class Personagem {
         pontosDeVida -= ataqueInimigo;
     }
 
-
     @Override
     public String toString() {
         return classe + "{" +

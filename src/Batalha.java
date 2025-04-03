@@ -57,17 +57,18 @@ public class Batalha {
         return false;
     }
 
-    public int calularDano(Personagem personagem) {
+    public static int calularDano(Personagem personagem) {
         System.out.println("Calculando dano...");
         int dano = personagem.getForca();
         String[] fatorDeDano = personagem.getFatorDeDano().split("d");
         int quantidadeVezesDado = Integer.parseInt(fatorDeDano[0]);
         int dadoLados = Integer.parseInt(fatorDeDano[1]);
         for (int i = 1; i <=quantidadeVezesDado;i++) {
-            dano += dado.rolarDado(dadoLados);
+            dano += Dado.rolarDado(dadoLados);
         }
         return dano;
     }
+
     public int ataquePersonagem(Personagem personagem) {
         if (verificarAtaque(personagem)) {
             System.out.println(personagem.getClass() + ": Pronto para atacar!");
@@ -76,4 +77,11 @@ public class Batalha {
         return 0;
     }
 
+    public void ataqueAoAdversario(Personagem atacaAdversario,Personagem recebeOAtaque) {
+        System.out.println(atacaAdversario.getClasse() + " atacou o " + recebeOAtaque.getClasse());
+        int dano = calularDano(atacaAdversario);
+        recebeOAtaque.receberAtaque(dano);
+        System.out.println(atacaAdversario.getClasse() + " atacou com " + dano + " de dano ao " + recebeOAtaque.getClasse());
+    }
 }
+
