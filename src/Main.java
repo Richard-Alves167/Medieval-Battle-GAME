@@ -43,6 +43,7 @@ public class Main {
                 }
                 heroiAtaca = true;
             }
+            metodoBatalha.verificarResultadoRodada(heroiDeJogador,monstroDeBatalha,rodadas);
             rodadas++;
         } while (heroiDeJogador.getPontosDeVida() >= 0 && monstroDeBatalha.getPontosDeVida() >= 0);
         System.out.println("\nFim da batalha!");

@@ -69,19 +69,19 @@ public class Batalha {
         return dano;
     }
 
-    public int ataquePersonagem(Personagem personagem) {
-        if (verificarAtaque(personagem)) {
-            System.out.println(personagem.getClass() + ": Pronto para atacar!");
-            return calularDano(personagem);
-        }
-        return 0;
-    }
-
     public void ataqueAoAdversario(Personagem atacaAdversario,Personagem recebeOAtaque) {
         System.out.println(atacaAdversario.getClasse() + " atacou o " + recebeOAtaque.getClasse());
         int dano = calularDano(atacaAdversario);
         recebeOAtaque.receberAtaque(dano);
         System.out.println(atacaAdversario.getClasse() + " atacou com " + dano + " de dano ao " + recebeOAtaque.getClasse());
     }
+
+    public void verificarResultadoRodada(Personagem heroi,Personagem monstro, int rodada) {
+        System.out.println("\n========== Resultado da rodada " + rodada + " ==========");
+        System.out.println(heroi.getClasse() + ": " + heroi.getPontosDeVida() + " pontos de vida restantes.");
+        System.out.println(monstro.getClasse() + ": " + monstro.getPontosDeVida() + " pontos de vida restantes.");
+        System.out.println("=========================================");
+    }
+
 }
 

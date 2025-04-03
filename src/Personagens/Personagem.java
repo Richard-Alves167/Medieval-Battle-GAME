@@ -63,6 +63,10 @@ public class Personagem {
         pontosDeVida -= ataqueInimigo;
     }
 
+    public void verificarVidaRestante(){
+        System.out.println(getClasse() + ": " + getPontosDeVida() + " pontos de vida restantes.");
+    }
+
     @Override
     public String toString() {
         return classe + "{" +
