@@ -46,13 +46,9 @@ public class Main {
             metodoBatalha.verificarResultadoRodada(heroiDeJogador,monstroDeBatalha,rodadas);
             rodadas++;
         } while (heroiDeJogador.getPontosDeVida() >= 0 && monstroDeBatalha.getPontosDeVida() >= 0);
-        System.out.println("\nFim da batalha!");
-        if (heroiDeJogador.getPontosDeVida() <= 0) {
-            System.out.println("Você perdeu!");
-        } else {
-            System.out.println("Você derrotou o monstro! Parabéns!");
-        }
+        metodoBatalha.resultadoBatalha(heroiDeJogador, monstroDeBatalha);
     }
+
     public static void informacaoEscolherHeroi() {
         System.out.println("===== Heróis =====");
         System.out.println("(1) Herói -> Guerreiro");

@@ -83,5 +83,13 @@ public class Batalha {
         System.out.println("=========================================");
     }
 
+    public void resultadoBatalha(Personagem heroi, Personagem monstro) {
+        System.out.println("\n*===== Fim da batalha! =====*");
+        if (heroi.getPontosDeVida() <= 0) {
+            System.out.println("Você perdeu! O " + monstro.getClasse() + " saiu vitorioso.");
+        } else {
+            System.out.println("Você derrotou o " + monstro.getClasse() + ", Parabéns!");
+        }
+    }
 }
 
