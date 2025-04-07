@@ -12,25 +12,23 @@ public class Main {
         Heroi metodoHeroi = new Heroi();
         Monstro metodoMonstro = new Monstro();
         Batalha metodoBatalha = new Batalha();
+
         System.out.println("=============== Medieval Battle VideoGame ===============");
         System.out.println("Olá jogador, coloque o seu Nickname e qual classe de Héroi deseja escolher.");
 
-        System.out.print("Nickname: ");
-        String nomeDeJogador = leitor.nextLine();
+        String nomeDeJogador = escolherNickname();
         informacaoEscolherHeroi();
-
-        int classeHeroiDeJogador = metodoHeroi.escolherPersonagem();
-        Heroi heroiDeJogador = metodoHeroi.selecionarPersonagem(classeHeroiDeJogador);
-        System.out.println("Configurando Classe...");
+        Heroi heroiDeJogador = metodoHeroi.selecionarPersonagem(metodoHeroi.escolherPersonagem());
         Monstro monstroDeBatalha = metodoMonstro.selecionarPersonagemAleatorio();
+
         System.out.println("Pronto jogador " + nomeDeJogador + ", sua batalha irá começar!");
         System.out.println("\nHerói escolhido: " + heroiDeJogador.toString());
         System.out.println("Monstro escolhido para a batalha: " + monstroDeBatalha.toString());
-        System.out.println("\nPara iniciar a batalha, iremos ver quem terá o maior número, rolando o dado de inicialização (10 lados) com mais o número de agilidade do personagem.");
         boolean heroiAtaca = metodoBatalha.iniciarBatalha(heroiDeJogador, monstroDeBatalha);
 
-        int rodadas = 1;
+        int rodadas = 0;
         do {
+            rodadas++;
             System.out.println("\nRodada " + rodadas);
             if (heroiAtaca) {
                 if (metodoBatalha.verificarAtaque(heroiDeJogador)) {
@@ -44,11 +42,17 @@ public class Main {
                 heroiAtaca = true;
             }
             metodoBatalha.verificarResultadoRodada(heroiDeJogador,monstroDeBatalha,rodadas);
-            rodadas++;
-        } while (heroiDeJogador.getPontosDeVida() >= 0 && monstroDeBatalha.getPontosDeVida() >= 0);
-        metodoBatalha.resultadoBatalha(heroiDeJogador, monstroDeBatalha);
+        } while (heroiDeJogador.getPontosDeVida() > 0 && monstroDeBatalha.getPontosDeVida() > 0);
+        String resultadoBatalha = metodoBatalha.resultadoBatalha(heroiDeJogador, monstroDeBatalha);
+        metodoBatalha.gravarBatalha(heroiDeJogador.getClasse(),resultadoBatalha,monstroDeBatalha.getClasse(),rodadas);
     }
 
+    public static String escolherNickname() {
+        Scanner leitor = new Scanner(System.in);
+        System.out.print("Nickname: ");
+        String nomeDeJogador = leitor.nextLine();
+        return nomeDeJogador;
+    }
     public static void informacaoEscolherHeroi() {
         System.out.println("===== Heróis =====");
         System.out.println("(1) Herói -> Guerreiro");

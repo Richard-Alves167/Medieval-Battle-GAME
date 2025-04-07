@@ -2,6 +2,11 @@ import Personagens.Herois.Heroi;
 import Personagens.Monstros.Monstro;
 import Personagens.Personagem;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Random;
 
 public class Batalha {
@@ -16,7 +21,7 @@ public class Batalha {
         int valorHeroi;
         int valorMonstro;
         boolean valorResultante;
-
+        System.out.println("\nPara iniciar a batalha, iremos ver quem terá o maior número, rolando o dado de inicialização (10 lados) com mais o número de agilidade do personagem.");
         do {
             System.out.println("Rolando os dados...");
             valorHeroi = inicializacaoDeBatalha(heroiEscolhido.getAgilidade());
@@ -83,13 +88,23 @@ public class Batalha {
         System.out.println("=========================================");
     }
 
-    public void resultadoBatalha(Personagem heroi, Personagem monstro) {
+    public String resultadoBatalha(Personagem heroi, Personagem monstro) {
+        String heroiVenceu;
         System.out.println("\n*===== Fim da batalha! =====*");
         if (heroi.getPontosDeVida() <= 0) {
+            heroiVenceu = "PERDEU";
             System.out.println("Você perdeu! O " + monstro.getClasse() + " saiu vitorioso.");
         } else {
+            heroiVenceu = "GANHOU";
             System.out.println("Você derrotou o " + monstro.getClasse() + ", Parabéns!");
         }
+        return heroiVenceu;
+    }
+    public void gravarBatalha(String heroiEscolhido, String resultadoBatalha, String monstroEnfrentado, int quantidadeRodadas) {
+        DateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = formatoData.format(new Date()).toString();
+        System.out.println(String.format("%s,%s,%s,%s,%d",dataFormatada,heroiEscolhido,resultadoBatalha,monstroEnfrentado,quantidadeRodadas));
+
     }
 }
 

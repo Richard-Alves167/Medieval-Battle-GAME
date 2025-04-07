@@ -39,6 +39,7 @@ public class Heroi extends Personagem {
                 break;
             }
         }
+        System.out.println("Configurando Classe...");
         return monstroSelecionado;
     }
 }
