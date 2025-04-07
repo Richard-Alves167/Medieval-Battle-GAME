@@ -137,13 +137,13 @@ public class Batalha {
 
     private String buscarJogador() {
         Scanner leitor =  new Scanner(System.in);
-        System.out.print("Buscar jogador no relatório: ");
+        System.out.print("\nBuscar jogador no relatório: ");
         String jogador = leitor.nextLine();
         return jogador;
     }
 
-    private boolean verificarArquivoJogador() {
-        String nicknameJogador = buscarJogador();
+    private boolean verificarArquivoJogador(String nicknameJogador) {
+        System.out.println("\nVerificando jogador...");
         Path diretorioJogador = caminhoJogador(nicknameJogador);
         try {
             InputStream inputStream = Files.newInputStream(diretorioJogador);
@@ -154,7 +154,9 @@ public class Batalha {
     }
 
     public void buscarRelatorios() {
-        if (verificarArquivoJogador()) {
+        String jogador = buscarJogador();
+        if (verificarArquivoJogador(jogador)) {
+            DadosJogador dadosDoJogador = new DadosJogador(jogador);
             System.out.println("Heroi mais jogado: Guerreiro\nMonstro mais enfrentado: Kobold\nQuantiadade total de Pontos: 103\nquantiadeDeRodadas: 14");
         } else {
             System.out.println("Jogador não encontrado no sistema. :(");
