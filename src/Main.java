@@ -46,6 +46,7 @@ public class Main {
         String resultadoBatalha = metodoBatalha.resultadoBatalha(heroiDeJogador, monstroDeBatalha);
         String gravarResultado = metodoBatalha.gravarBatalha(heroiDeJogador.getClasse(),resultadoBatalha,monstroDeBatalha.getClasse(),rodadas);
         metodoBatalha.gravarBatalhaNoArquivo(nomeDeJogador,gravarResultado);
+        metodoBatalha.buscarRelatorios();
     }
 
     public static String escolherNickname() {

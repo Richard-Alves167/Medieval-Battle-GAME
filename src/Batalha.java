@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Batalha {
     Dado dado = new Dado();
@@ -67,7 +68,7 @@ public class Batalha {
         return false;
     }
 
-    public static int calularDano(Personagem personagem) {
+    private static int calularDano(Personagem personagem) {
         System.out.println("Calculando dano...");
         int dano = personagem.getForca();
         String[] fatorDeDano = personagem.getFatorDeDano().split("d");
@@ -112,10 +113,16 @@ public class Batalha {
         return String.format("\n%s,%s,%s,%s,%d",dataFormatada,heroiEscolhido,resultadoBatalha,monstroEnfrentado,quantidadeRodadas);
     }
 
+    private Path caminhoJogador(String nicknameJogador) {
+        String diretorioJogador = String.format("%s.csv",nicknameJogador);
+        Path caminhoDiretorio = Paths.get("src","Temp",diretorioJogador);
+        return caminhoDiretorio;
+    }
+
+
     public void gravarBatalhaNoArquivo(String nicknameJogador, String resultadoBatalha) {
         try {
-            String diretorioJogador = String.format("%s.csv",nicknameJogador);
-            Path caminhoDiretorio = Paths.get("src","Temp",diretorioJogador);
+            Path caminhoDiretorio = caminhoJogador(nicknameJogador);
             OutputStream escreverArquivo = Files.newOutputStream(caminhoDiretorio, StandardOpenOption.CREATE,StandardOpenOption.APPEND);
             InputStream lerArquivo = Files.newInputStream(caminhoDiretorio);
             if (lerArquivo.read() == -1) {
@@ -125,6 +132,32 @@ public class Batalha {
             System.out.println("Resultado da batalha salvo no sistema!");
         } catch (Exception ex) {
             System.out.println("Erro ao encontrar o arquivo.");
+        }
+    }
+
+    private String buscarJogador() {
+        Scanner leitor =  new Scanner(System.in);
+        System.out.print("Buscar jogador no relatório: ");
+        String jogador = leitor.nextLine();
+        return jogador;
+    }
+
+    private boolean verificarArquivoJogador() {
+        String nicknameJogador = buscarJogador();
+        Path diretorioJogador = caminhoJogador(nicknameJogador);
+        try {
+            InputStream inputStream = Files.newInputStream(diretorioJogador);
+        } catch (Exception ex) {
+            return false;
+        }
+        return true;
+    }
+
+    public void buscarRelatorios() {
+        if (verificarArquivoJogador()) {
+            System.out.println("Heroi mais jogado: Guerreiro\nMonstro mais enfrentado: Kobold\nQuantiadade total de Pontos: 103\nquantiadeDeRodadas: 14");
+        } else {
+            System.out.println("Jogador não encontrado no sistema. :(");
         }
     }
 
