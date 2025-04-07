@@ -44,7 +44,8 @@ public class Main {
             metodoBatalha.verificarResultadoRodada(heroiDeJogador,monstroDeBatalha,rodadas);
         } while (heroiDeJogador.getPontosDeVida() > 0 && monstroDeBatalha.getPontosDeVida() > 0);
         String resultadoBatalha = metodoBatalha.resultadoBatalha(heroiDeJogador, monstroDeBatalha);
-        metodoBatalha.gravarBatalha(heroiDeJogador.getClasse(),resultadoBatalha,monstroDeBatalha.getClasse(),rodadas);
+        String gravarResultado = metodoBatalha.gravarBatalha(heroiDeJogador.getClasse(),resultadoBatalha,monstroDeBatalha.getClasse(),rodadas);
+        metodoBatalha.gravarBatalhaNoArquivo(nomeDeJogador,gravarResultado);
     }
 
     public static String escolherNickname() {

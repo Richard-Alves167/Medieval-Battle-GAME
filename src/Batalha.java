@@ -2,6 +2,11 @@ import Personagens.Herois.Heroi;
 import Personagens.Monstros.Monstro;
 import Personagens.Personagem;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -100,11 +105,25 @@ public class Batalha {
         }
         return heroiVenceu;
     }
-    public void gravarBatalha(String heroiEscolhido, String resultadoBatalha, String monstroEnfrentado, int quantidadeRodadas) {
+    public String gravarBatalha(String heroiEscolhido, String resultadoBatalha, String monstroEnfrentado, int quantidadeRodadas) {
         DateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatada = formatoData.format(new Date()).toString();
-        System.out.println(String.format("%s,%s,%s,%s,%d",dataFormatada,heroiEscolhido,resultadoBatalha,monstroEnfrentado,quantidadeRodadas));
-
+        return String.format("\n%s,%s,%s,%s,%d",dataFormatada,heroiEscolhido,resultadoBatalha,monstroEnfrentado,quantidadeRodadas);
+    }
+    public void gravarBatalhaNoArquivo(String nicknameJogador, String resultadoBatalha) {
+        try {
+            String caminhoString = String.format("C:\\Users\\richard.alves\\IdeaProjects\\Medieval-Battle-GAME\\src\\Temp\\%s.csv",nicknameJogador);
+            Path caminhoCriptografado = Paths.get(caminhoString);
+            OutputStream escreverArquivo = Files.newOutputStream(caminhoCriptografado, StandardOpenOption.CREATE,StandardOpenOption.APPEND);
+            FileReader arquivoLido = new FileReader(caminhoString);
+            if (arquivoLido.read() == -1) {
+                escreverArquivo.write("Data da Partida; Herói escolhido; PERDEU[ou]GANHOU; Monstro enfrentado; Quantidade de Rodadas".getBytes());
+            }
+            escreverArquivo.write(resultadoBatalha.getBytes());
+            System.out.println("Resultado da batalha salvo no sistema!");
+        } catch (Exception ex) {
+            System.out.println("Erro ao encontrar o arquivo.");
+        }
     }
 }
 
