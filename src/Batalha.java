@@ -105,19 +105,21 @@ public class Batalha {
         }
         return heroiVenceu;
     }
+
     public String gravarBatalha(String heroiEscolhido, String resultadoBatalha, String monstroEnfrentado, int quantidadeRodadas) {
         DateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatada = formatoData.format(new Date()).toString();
         return String.format("\n%s,%s,%s,%s,%d",dataFormatada,heroiEscolhido,resultadoBatalha,monstroEnfrentado,quantidadeRodadas);
     }
+
     public void gravarBatalhaNoArquivo(String nicknameJogador, String resultadoBatalha) {
         try {
-            String caminhoString = String.format("C:\\Users\\richard.alves\\IdeaProjects\\Medieval-Battle-GAME\\src\\Temp\\%s.csv",nicknameJogador);
-            Path caminhoCriptografado = Paths.get(caminhoString);
-            OutputStream escreverArquivo = Files.newOutputStream(caminhoCriptografado, StandardOpenOption.CREATE,StandardOpenOption.APPEND);
-            FileReader arquivoLido = new FileReader(caminhoString);
-            if (arquivoLido.read() == -1) {
-                escreverArquivo.write("Data da Partida; Herói escolhido; PERDEU[ou]GANHOU; Monstro enfrentado; Quantidade de Rodadas".getBytes());
+            String diretorioJogador = String.format("%s.csv",nicknameJogador);
+            Path caminhoDiretorio = Paths.get("src","Temp",diretorioJogador);
+            OutputStream escreverArquivo = Files.newOutputStream(caminhoDiretorio, StandardOpenOption.CREATE,StandardOpenOption.APPEND);
+            InputStream lerArquivo = Files.newInputStream(caminhoDiretorio);
+            if (lerArquivo.read() == -1) {
+                escreverArquivo.write("Data da Partida;Herói escolhido;PERDEU[ou]GANHOU;Monstro enfrentado;Quantidade de Rodadas".getBytes());
             }
             escreverArquivo.write(resultadoBatalha.getBytes());
             System.out.println("Resultado da batalha salvo no sistema!");
@@ -125,5 +127,7 @@ public class Batalha {
             System.out.println("Erro ao encontrar o arquivo.");
         }
     }
+
+
 }
 
