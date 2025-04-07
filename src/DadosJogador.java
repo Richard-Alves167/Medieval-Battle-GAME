@@ -20,7 +20,7 @@ public class DadosJogador {
         this.nomeJogador = nomeJogador;
         this.caminhoDiretorio = Paths.get("src","Temp",nomeJogador+".csv");
         batalhas = new ArrayList<String>();
-        verRelatorioBatalhas();
+        relatorioBatalhas();
         calcularQuantidadeDePontos();
     }
 
@@ -29,11 +29,11 @@ public class DadosJogador {
         System.out.println(String.format("* Heroi mais jogado: %s",personagemMaisJogado));
         System.out.println(String.format("* Monstro mais enfrentado: %s",monstroMaisEnfrentado));
         System.out.println(String.format("* Quantiadade total de Pontos: %d",totalDePontos));
-        System.out.println(String.format("* Quantidade de Rodadas",personagemMaisJogado));
+        System.out.println(String.format("* Quantidade de Rodadas: %d",quantidadeDeRodadas));
         System.out.println("===============================================");
     }
 
-    public void verRelatorioBatalhas() {
+    private void relatorioBatalhas() {
         try {
             String linha;
             InputStream inputStream = Files.newInputStream(caminhoDiretorio);
@@ -49,10 +49,10 @@ public class DadosJogador {
         }
     }
 
-    public void calcularQuantidadeDePontos() {
+    private void calcularQuantidadeDePontos() {
         for (String batalha : batalhas) {
             String[] linha = batalha.split(",");
-            if (linha[2] == "GANHOU") {
+            if (linha[2].equals("GANHOU")) {
                 totalDePontos += 100 - Integer.parseInt(linha[4]);
             }
         }

@@ -157,6 +157,7 @@ public class Batalha {
         String jogador = buscarJogador();
         if (verificarArquivoJogador(jogador)) {
             DadosJogador dadosDoJogador = new DadosJogador(jogador);
+            dadosDoJogador.verStatusDeJogador();
             System.out.println("Heroi mais jogado: Guerreiro\nMonstro mais enfrentado: Kobold\nQuantiadade total de Pontos: 103\nquantiadeDeRodadas: 14");
         } else {
             System.out.println("Jogador não encontrado no sistema. :(");
