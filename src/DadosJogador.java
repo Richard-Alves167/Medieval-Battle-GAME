@@ -11,8 +11,8 @@ public class DadosJogador {
     private String nomeJogador;
     private Path caminhoDiretorio;
     private ArrayList<String> batalhas;
-    private Personagem personagemMaisJogado;
-    private Personagem monstroMaisEnfrentado;
+    private String personagemMaisJogado;
+    private String monstroMaisEnfrentado;
     private int totalDePontos; //Sendo que a cada batalha a quantidade de pontos é dada por 100
     private int quantidadeDeRodadas;
 
@@ -21,6 +21,7 @@ public class DadosJogador {
         this.caminhoDiretorio = Paths.get("src","Temp",nomeJogador+".csv");
         batalhas = new ArrayList<String>();
         relatorioBatalhas();
+        calcularPersonagemMaisJogado();
         calcularQuantidadeDePontos();
         calcularQuantidadeDeRodadas();
     }
@@ -56,6 +57,47 @@ public class DadosJogador {
             if (linha[2].equals("GANHOU")) {
                 totalDePontos += 100 - Integer.parseInt(linha[4]);
             }
+        }
+    }
+
+    private void calcularPersonagemMaisJogado() {
+        ArrayList<String> heroisJogados = new ArrayList<String>();
+        int contagemGuerreiro = 0;
+        int contagemBarbaro = 0;
+        int contagemPaladino = 0;
+        int maiorNumeroHeroi = 0;
+        for (String batalha : batalhas) {
+            String[] linha = batalha.split(",");
+            heroisJogados.add(linha[1]);
+        }
+        for (String heroi : heroisJogados) {
+            switch (heroi) {
+                case "Guerreiro": {
+                    contagemGuerreiro++;
+                    break;
+                }
+                case "Bárbaro": {
+                    contagemBarbaro++;
+                    break;
+                }
+                case "Paladino": {
+                    contagemPaladino++;
+                    break;
+                }
+            }
+        }
+        int[] contagemHerois = {contagemGuerreiro,contagemBarbaro,contagemPaladino};
+        for (int contagemHeroi : contagemHerois) {
+            if (contagemHeroi > maiorNumeroHeroi) {
+                maiorNumeroHeroi = contagemHeroi;
+            }
+        }
+        if (maiorNumeroHeroi == contagemGuerreiro) {
+            personagemMaisJogado = "Guerreiro";
+        } else if (maiorNumeroHeroi == contagemBarbaro) {
+            personagemMaisJogado = "Bárbaro";
+        } else if (maiorNumeroHeroi == contagemPaladino) {
+            personagemMaisJogado = "Paladino";
         }
     }
 
