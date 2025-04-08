@@ -22,6 +22,7 @@ public class DadosJogador {
         batalhas = new ArrayList<String>();
         relatorioBatalhas();
         calcularQuantidadeDePontos();
+        calcularQuantidadeDeRodadas();
     }
 
     public void verStatusDeJogador() {
@@ -58,4 +59,10 @@ public class DadosJogador {
         }
     }
 
+    private void calcularQuantidadeDeRodadas() {
+        for (String batalha : batalhas) {
+            String[] linha = batalha.split(",");
+            quantidadeDeRodadas += Integer.parseInt(linha[4]);
+        }
+    }
 }
