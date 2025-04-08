@@ -17,6 +17,12 @@ import java.util.Scanner;
 
 public class Batalha {
     Dado dado = new Dado();
+    private static void pausaNoCodigo(int tempoEscolhido) {
+        try {
+            Thread.sleep(tempoEscolhido);
+        } catch (Exception e) {
+        }
+    }
 
     public int inicializacaoDeBatalha(int fatorAgiligade) {
         int calculoIniciativa = dado.rolarDado10Lados() + fatorAgiligade;
@@ -92,6 +98,7 @@ public class Batalha {
         System.out.println(heroi.getClasse() + ": " + heroi.getPontosDeVida() + " pontos de vida restantes.");
         System.out.println(monstro.getClasse() + ": " + monstro.getPontosDeVida() + " pontos de vida restantes.");
         System.out.println("=========================================");
+        pausaNoCodigo(3500);
     }
 
     public String resultadoBatalha(Personagem heroi, Personagem monstro) {

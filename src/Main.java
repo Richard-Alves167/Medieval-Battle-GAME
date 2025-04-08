@@ -15,12 +15,14 @@ public class Main {
                 case 1: {
                     System.out.println("Selecionado: Jogar Video Game");
                     System.out.println("Carregando...");
+                    pausaNoCodigo(2000);
                     jogarVideoGame();
                     break;
                 }
                 case 2: {
                     System.out.println("Selecionado: Buscar relatório de Jogador");
                     System.out.println("Carregando...");
+                    pausaNoCodigo(2000);
                     buscarRelatorioJogador();
                     break;
                 }
@@ -29,6 +31,12 @@ public class Main {
         System.out.println("\n* ===== Game Over ===== *");
     }
 
+    public static void pausaNoCodigo(int tempoEscolhido) {
+        try {
+            Thread.sleep(tempoEscolhido);
+        } catch (Exception e) {
+        }
+    }
     public static int escolherNumero() {
         int numeroEscolhido = 0;
         boolean pararLoop = false;
@@ -47,12 +55,13 @@ public class Main {
         } while (!pararLoop);
         return numeroEscolhido;
     }
+
     public static void menuVideoGame() {
-        System.out.println("\n=============== Medieval Battle VideoGame ===============");
+        System.out.println("\n============\u2694\uFE0F Medieval Battle VideoGame \u2694\uFE0F============");
         System.out.println("(1) -> Jogar Video Game");
         System.out.println("(2) -> Buscar relatório de Jogador");
         System.out.println("(3) -> Sair");
-        System.out.println("=========================================================");
+        System.out.println("=======================================================");
         System.out.print("Escolher opção: ");
     }
     public static String escolherNickname() {
