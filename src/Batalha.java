@@ -136,7 +136,7 @@ public class Batalha {
 
     private String buscarJogador() {
         Scanner leitor =  new Scanner(System.in);
-        System.out.print("\nBuscar jogador no relatório: ");
+        System.out.print("\nProcurar Jogador: ");
         String jogador = leitor.nextLine();
         return jogador;
     }

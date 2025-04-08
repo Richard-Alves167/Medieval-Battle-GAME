@@ -7,15 +7,73 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        int escolhaUsuario = 0;
+        do {
+            menuVideoGame();
+            escolhaUsuario = escolherNumero();
+            switch (escolhaUsuario) {
+                case 1: {
+                    System.out.println("Selecionado: Jogar Video Game");
+                    System.out.println("Carregando...");
+                    jogarVideoGame();
+                    break;
+                }
+                case 2: {
+                    System.out.println("Selecionado: Buscar relatório de Jogador");
+                    System.out.println("Carregando...");
+                    buscarRelatorioJogador();
+                    break;
+                }
+            }
+        } while (escolhaUsuario != 3);
+        System.out.println("\n* ===== Game Over ===== *");
+    }
+
+    public static int escolherNumero() {
+        int numeroEscolhido = 0;
+        boolean pararLoop = false;
+        do {
+            try {
+                Scanner leitor = new Scanner(System.in);
+                numeroEscolhido = leitor.nextInt();
+                if (numeroEscolhido < 1 || numeroEscolhido > 3) {
+                    throw new Exception();
+                }
+                pararLoop = true;
+            } catch (Exception ex) {
+                System.out.println("Valor inválido.");
+                System.out.print("Tente novamente: ");
+            }
+        } while (!pararLoop);
+        return numeroEscolhido;
+    }
+    public static void menuVideoGame() {
+        System.out.println("\n=============== Medieval Battle VideoGame ===============");
+        System.out.println("(1) -> Jogar Video Game");
+        System.out.println("(2) -> Buscar relatório de Jogador");
+        System.out.println("(3) -> Sair");
+        System.out.println("=========================================================");
+        System.out.print("Escolher opção: ");
+    }
+    public static String escolherNickname() {
         Scanner leitor = new Scanner(System.in);
-        Random aleatorio = new Random();
+        System.out.print("Nickname: ");
+        String nomeDeJogador = leitor.nextLine();
+        return nomeDeJogador;
+    }
+    public static void informacaoEscolherHeroi() {
+        System.out.println("===== Heróis =====");
+        System.out.println("(1) Herói -> Guerreiro");
+        System.out.println("(2) Herói -> Bárbaro");
+        System.out.println("(3) Herói -> Paladino");
+        System.out.println("==================");
+    }
+    public static void jogarVideoGame() {
         Heroi metodoHeroi = new Heroi();
         Monstro metodoMonstro = new Monstro();
         Batalha metodoBatalha = new Batalha();
 
-        System.out.println("=============== Medieval Battle VideoGame ===============");
         System.out.println("Olá jogador, coloque o seu Nickname e qual classe de Héroi deseja escolher.");
-
         String nomeDeJogador = escolherNickname();
         informacaoEscolherHeroi();
         Heroi heroiDeJogador = metodoHeroi.selecionarPersonagem(metodoHeroi.escolherPersonagem());
@@ -46,20 +104,10 @@ public class Main {
         String resultadoBatalha = metodoBatalha.resultadoBatalha(heroiDeJogador, monstroDeBatalha);
         String gravarResultado = metodoBatalha.gravarBatalha(heroiDeJogador.getClasse(),resultadoBatalha,monstroDeBatalha.getClasse(),rodadas);
         metodoBatalha.gravarBatalhaNoArquivo(nomeDeJogador,gravarResultado);
+    }
+    public static void buscarRelatorioJogador() {
+        Batalha metodoBatalha = new Batalha();
         metodoBatalha.buscarRelatorios();
     }
 
-    public static String escolherNickname() {
-        Scanner leitor = new Scanner(System.in);
-        System.out.print("Nickname: ");
-        String nomeDeJogador = leitor.nextLine();
-        return nomeDeJogador;
-    }
-    public static void informacaoEscolherHeroi() {
-        System.out.println("===== Heróis =====");
-        System.out.println("(1) Herói -> Guerreiro");
-        System.out.println("(2) Herói -> Bárbaro");
-        System.out.println("(3) Herói -> Paladino");
-        System.out.println("==================");
-    }
 }
