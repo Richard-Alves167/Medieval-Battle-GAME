@@ -22,6 +22,7 @@ public class DadosJogador {
         batalhas = new ArrayList<String>();
         relatorioBatalhas();
         calcularPersonagemMaisJogado();
+        calcularMonstroMaisEnfrentado();
         calcularQuantidadeDePontos();
         calcularQuantidadeDeRodadas();
     }
@@ -32,7 +33,7 @@ public class DadosJogador {
         System.out.println(String.format("* Monstro mais enfrentado: %s",monstroMaisEnfrentado));
         System.out.println(String.format("* Quantiadade total de Pontos: %d",totalDePontos));
         System.out.println(String.format("* Quantidade de Rodadas: %d",quantidadeDeRodadas));
-        System.out.println("===============================================");
+        System.out.println("=======================================");
     }
 
     private void relatorioBatalhas() {
@@ -98,6 +99,47 @@ public class DadosJogador {
             personagemMaisJogado = "Bárbaro";
         } else if (maiorNumeroHeroi == contagemPaladino) {
             personagemMaisJogado = "Paladino";
+        }
+    }
+
+    private void calcularMonstroMaisEnfrentado() {
+        ArrayList<String> monstrosEnfrentados = new ArrayList<String>();
+        int contagemMortoVivo = 0;
+        int contagemOrc = 0;
+        int contagemKobold = 0;
+        int maiorNumeroMonstro = 0;
+        for (String batalha : batalhas) {
+            String[] linha = batalha.split(",");
+            monstrosEnfrentados.add(linha[1]);
+        }
+        for (String monstro : monstrosEnfrentados) {
+            switch (monstro) {
+                case "Morto Vivo": {
+                    contagemMortoVivo++;
+                    break;
+                }
+                case "Orc": {
+                    contagemOrc++;
+                    break;
+                }
+                case "Kobold": {
+                    contagemKobold++;
+                    break;
+                }
+            }
+        }
+        int[] contagemMonstros = {contagemMortoVivo,contagemOrc,contagemKobold};
+        for (int contagemMonstro : contagemMonstros) {
+            if (contagemMonstro > maiorNumeroMonstro) {
+                maiorNumeroMonstro = contagemMonstro;
+            }
+        }
+        if (maiorNumeroMonstro == contagemMortoVivo) {
+            monstroMaisEnfrentado = "Morto Vivo";
+        } else if (maiorNumeroMonstro == contagemOrc) {
+            monstroMaisEnfrentado = "Orc";
+        } else if (maiorNumeroMonstro == contagemKobold) {
+            monstroMaisEnfrentado = "Kobold";
         }
     }
 
