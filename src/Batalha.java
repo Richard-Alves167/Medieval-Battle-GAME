@@ -1,3 +1,4 @@
+import EstilizacaoTerminal.MudarCorTerminal;
 import Personagens.Herois.Heroi;
 import Personagens.Monstros.Monstro;
 import Personagens.Personagem;
@@ -17,6 +18,7 @@ import java.util.Scanner;
 
 public class Batalha {
     Dado dado = new Dado();
+    MudarCorTerminal mudarCor = new MudarCorTerminal();
     private static void pausaNoCodigo(int tempoEscolhido) {
         try {
             Thread.sleep(tempoEscolhido);
@@ -35,6 +37,7 @@ public class Batalha {
         boolean valorResultante;
         System.out.println("\nPara iniciar a batalha, iremos ver quem terá o maior número, rolando o dado de inicialização (10 lados) com mais o número de agilidade do personagem.");
         do {
+            mudarCor.
             System.out.println("Rolando os dados...");
             valorHeroi = inicializacaoDeBatalha(heroiEscolhido.getAgilidade());
             valorMonstro = inicializacaoDeBatalha(monstroEscolhido.getAgilidade());
