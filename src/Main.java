@@ -1,3 +1,4 @@
+import EstilizacaoTerminal.MudarCorTerminal;
 import Personagens.Herois.Heroi;
 import Personagens.Monstros.Monstro;
 import Personagens.Personagem;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        MudarCorTerminal mudarCor = new MudarCorTerminal();
         int escolhaUsuario = 0;
         do {
             menuVideoGame();
@@ -14,28 +16,31 @@ public class Main {
             switch (escolhaUsuario) {
                 case 1: {
                     System.out.println("Selecionado: Jogar Video Game");
-                    System.out.println("Carregando...");
-                    pausaNoCodigo(2000);
+                    carregarTerminal(2000);
                     jogarVideoGame();
                     break;
                 }
                 case 2: {
                     System.out.println("Selecionado: Buscar relatório de Jogador");
-                    System.out.println("Carregando...");
-                    pausaNoCodigo(2000);
+                    carregarTerminal(2000);
                     buscarRelatorioJogador();
                     break;
                 }
             }
         } while (escolhaUsuario != 3);
-        System.out.println("\n* ===== Game Over ===== *");
+        System.out.println(mudarCor.corAmarelo("* ===== Game Over ===== *"));
     }
 
-    public static void pausaNoCodigo(int tempoEscolhido) {
+    public static void pausaNoCodigo(int tempo) {
         try {
-            Thread.sleep(tempoEscolhido);
+            Thread.sleep(tempo);
         } catch (Exception e) {
         }
+    }
+    public static void carregarTerminal(int tempoEscolhido) {
+        MudarCorTerminal mudarCor = new MudarCorTerminal();
+        System.out.println(mudarCor.corAmarelo("Carregando..."));
+        pausaNoCodigo(2000);
     }
     public static int escolherNumero() {
         int numeroEscolhido = 0;
@@ -55,7 +60,6 @@ public class Main {
         } while (!pararLoop);
         return numeroEscolhido;
     }
-
     public static void menuVideoGame() {
         System.out.println("\n============\u2694\uFE0F Medieval Battle VideoGame \u2694\uFE0F============");
         System.out.println("(1) -> Jogar Video Game");
@@ -89,8 +93,8 @@ public class Main {
         Monstro monstroDeBatalha = metodoMonstro.selecionarPersonagemAleatorio();
 
         System.out.println("Pronto jogador " + nomeDeJogador + ", sua batalha irá começar!");
-        System.out.println("\nHerói escolhido: " + heroiDeJogador.toString());
-        System.out.println("Monstro escolhido para a batalha: " + monstroDeBatalha.toString());
+        System.out.println("\nHerói escolhido:\n" + heroiDeJogador.toString());
+        System.out.println("Monstro escolhido para a batalha:\n" + monstroDeBatalha.toString());
         boolean heroiAtaca = metodoBatalha.iniciarBatalha(heroiDeJogador, monstroDeBatalha);
 
         int rodadas = 0;
@@ -109,6 +113,9 @@ public class Main {
                 heroiAtaca = true;
             }
             metodoBatalha.verificarResultadoRodada(heroiDeJogador,monstroDeBatalha,rodadas);
+//            System.out.println("(Aperte para continuar)");
+//            Scanner scanner = new Scanner(System.in);
+//            scanner.nextLine();
         } while (heroiDeJogador.getPontosDeVida() > 0 && monstroDeBatalha.getPontosDeVida() > 0);
         String resultadoBatalha = metodoBatalha.resultadoBatalha(heroiDeJogador, monstroDeBatalha);
         String gravarResultado = metodoBatalha.gravarBatalha(heroiDeJogador.getClasse(),resultadoBatalha,monstroDeBatalha.getClasse(),rodadas);

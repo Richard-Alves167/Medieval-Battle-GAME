@@ -32,13 +32,13 @@ public class Batalha {
     }
 
     public boolean iniciarBatalha(Heroi heroiEscolhido, Monstro monstroEscolhido) {
+        pausaNoCodigo(2500);
         int valorHeroi;
         int valorMonstro;
         boolean valorResultante;
         System.out.println("\nPara iniciar a batalha, iremos ver quem terá o maior número, rolando o dado de inicialização (10 lados) com mais o número de agilidade do personagem.");
         do {
-            mudarCor.
-            System.out.println("Rolando os dados...");
+            mudarCor.corAmarelo("Rolando os dados...");
             valorHeroi = inicializacaoDeBatalha(heroiEscolhido.getAgilidade());
             valorMonstro = inicializacaoDeBatalha(monstroEscolhido.getAgilidade());
             System.out.println("Valor do Herói: " + valorHeroi);
@@ -70,10 +70,10 @@ public class Batalha {
 
     public boolean verificarAtaque(Personagem personagem) {
         if (fatorDeAtaque(personagem) > fatorDeDefesa(personagem)) {
-            System.out.println("O fator de ataque de "+ personagem.getClasse() + " foi superior ao de defesa!");
+            System.out.println(mudarCor.corVerde("O fator de ataque de "+ personagem.getClasse() + " foi superior ao de defesa!"));
             return true;
         }
-        System.out.println("O "+ personagem.getClasse() + " perdeu o ataque!");
+        System.out.println(mudarCor.corVermelha("O "+ personagem.getClasse() + " perdeu o ataque!"));
         return false;
     }
 
@@ -109,10 +109,10 @@ public class Batalha {
         System.out.println("\n*===== Fim da batalha! =====*");
         if (heroi.getPontosDeVida() <= 0) {
             heroiVenceu = "PERDEU";
-            System.out.println("Você perdeu! O " + monstro.getClasse() + " saiu vitorioso.");
+            System.out.println(mudarCor.corVermelha("Você perdeu! O " + monstro.getClasse() + " saiu vitorioso."));
         } else {
             heroiVenceu = "GANHOU";
-            System.out.println("Você derrotou o " + monstro.getClasse() + ", Parabéns!");
+            System.out.println(mudarCor.corVerde("Você derrotou o " + monstro.getClasse() + ", Parabéns!"));
         }
         return heroiVenceu;
     }
@@ -138,9 +138,9 @@ public class Batalha {
                 escreverArquivo.write("Data da Partida;Herói escolhido;PERDEU[ou]GANHOU;Monstro enfrentado;Quantidade de Rodadas".getBytes());
             }
             escreverArquivo.write(resultadoBatalha.getBytes());
-            System.out.println("Resultado da batalha salvo no sistema!");
+            System.out.println(mudarCor.corVerde("Resultado da batalha salvo no sistema!"));
         } catch (Exception ex) {
-            System.out.println("Erro ao encontrar o arquivo.");
+            System.out.println(mudarCor.corVermelha("Erro ao encontrar o arquivo."));
         }
     }
 
@@ -168,7 +168,7 @@ public class Batalha {
             DadosJogador dadosDoJogador = new DadosJogador(jogador);
             dadosDoJogador.verStatusDeJogador();
         } else {
-            System.out.println("Jogador não encontrado no sistema. :(");
+            System.out.println(mudarCor.corVermelha("Jogador não encontrado no sistema. :("));
         }
     }
 }

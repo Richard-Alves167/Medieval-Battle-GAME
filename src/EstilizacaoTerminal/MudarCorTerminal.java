@@ -2,16 +2,16 @@ package EstilizacaoTerminal;
 
 public class MudarCorTerminal {
     CorTerminal cores;
-    public void corVerde(String mensagem) {
-        System.out.println(cores.VERDE+mensagem+cores.RESETAR);
+    public String corVerde(String mensagem) {
+        return cores.VERDE.codigo+mensagem+cores.RESETAR.codigo;
     }
-    public void corVermelha(String mensagem) {
-        System.out.println(cores.VERMELHO+mensagem+cores.RESETAR);
+    public String corVermelha(String mensagem) {
+        return cores.VERMELHO.codigo+mensagem+cores.RESETAR.codigo;
     }
-    public void corAmarelo(String mensagem) {
-        System.out.println(cores.AZUL+mensagem+cores.RESETAR);
+    public String corAmarelo(String mensagem) {
+        return cores.AMARELO.codigo+mensagem+cores.RESETAR.codigo;
     }
-    public void corAzul(String mensagem) {
-        System.out.println(cores.AZUL+mensagem+cores.RESETAR);
+    public String corAzul(String mensagem) {
+        return cores.AZUL.codigo+mensagem+cores.RESETAR.codigo;
     }
 }

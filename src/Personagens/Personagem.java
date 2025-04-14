@@ -69,13 +69,14 @@ public class Personagem {
 
     @Override
     public String toString() {
-        return classe + "{" +
-                "pontosDeVida=" + pontosDeVida +
-                ", forca=" + forca +
-                ", defesa=" + defesa +
-                ", agilidade=" + agilidade +
-                ", fatorDeDano='" + fatorDeDano + '\'' +
-                '}';
+        return
+                "===========* " + classe + " *===========" +
+                "\nPontos De Vida = " + pontosDeVida +
+                "\nForça = " + forca +
+                "\nDefesa = " + defesa +
+                "\nAgilidade = " + agilidade +
+                "\nFator De Dano = " + fatorDeDano +
+                "\n============================";
     }
 
     protected int receberNumeroInt() {

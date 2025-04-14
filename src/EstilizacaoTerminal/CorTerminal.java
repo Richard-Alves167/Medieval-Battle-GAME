@@ -7,6 +7,9 @@ public enum CorTerminal {
     AMARELO("\u001B[33m"),
     AZUL("\u001B[34m");
 
+    public final String codigo;
+
     CorTerminal (String codigo){
+        this.codigo = codigo;
     }
 }
